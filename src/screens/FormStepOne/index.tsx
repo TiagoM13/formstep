@@ -8,7 +8,7 @@ import { Button } from '../../components/Button';
 import { styles } from './styles'
 
 export const FormStepOne = () => {
-  const { control, handleSubmit } = useForm()
+  const { control, handleSubmit, formState: { errors } } = useForm()
   const emailRef = useRef<TextInput>(null)
 
   function handleNextStep(data: any) {
@@ -21,7 +21,8 @@ export const FormStepOne = () => {
 
       <Input
         icon='user'
-        formProps={{ name: "name", control }}
+        error={errors.name?.message}
+        formProps={{ name: "name", control, rules: { required: "Nome é obrigatório" } }}
         inputProps={{
           placeholder: "Nome",
           onSubmitEditing: () => emailRef.current?.focus(),
@@ -30,9 +31,18 @@ export const FormStepOne = () => {
       />
 
       <Input
+        error={errors.email?.message}
         ref={emailRef}
         icon='mail'
-        formProps={{ name: "email", control }}
+        formProps={{
+          name: "email", control, rules: {
+            required: "E-mail é obrigatório",
+            pattern: {
+              value: /^[\w.-]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+$/,
+              message: "E-mail inválido."
+            }
+          }
+        }}
         inputProps={{ placeholder: "E-mail", onSubmitEditing: handleSubmit(handleNextStep) }}
       />
 
