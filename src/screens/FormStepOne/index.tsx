@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { View, Text, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 
 import { Input } from '../../components/Input';
@@ -8,11 +9,12 @@ import { Button } from '../../components/Button';
 import { styles } from './styles'
 
 export const FormStepOne = () => {
+  const { navigate } = useNavigation()
   const { control, handleSubmit, formState: { errors } } = useForm()
   const emailRef = useRef<TextInput>(null)
 
   function handleNextStep(data: any) {
-    console.log(data)
+    navigate("formStepTwo")
   }
 
   return (
