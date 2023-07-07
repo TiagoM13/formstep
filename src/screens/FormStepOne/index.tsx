@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { Progress } from '../../components/Progress';
 
 import { AccountProps } from '../../contexts/AccountFormContext';
 import { useAccountForm } from '../../hooks/useAccountForm';
@@ -24,6 +25,7 @@ export const FormStepOne = () => {
 
   return (
     <View style={styles.container}>
+      <Progress progress={30} />
       <Text style={styles.title}>Criar sua conta</Text>
 
       <Input
